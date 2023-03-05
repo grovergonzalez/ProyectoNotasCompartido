@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notas</title>
+    <title>Organizador de Notas</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
 </head>
 <body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="#">NOTAS</a>
+        </div>
+      </nav>
+
     <div class="creacion_notas">
         <form id="Crear_Nota_Form">
             <b><label style="font-size: x-large; font-style: italic;"  for="CrearNota">Nota:</label></b> <br>
@@ -20,6 +27,8 @@
         </form>
     </div>
     <div id="MostrarNotasDiv"></div>
+
     <script type="module" src="./src/presenter.js"></script>
+    
 </body>
 </html>
