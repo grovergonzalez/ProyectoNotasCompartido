@@ -5,6 +5,7 @@ function CrearNota(titulo, descripcion){
         fecha: new Date()   
     };
 }
+
 function GuardarNotas(nota){
     let notas = [];
     notas.push(nota);
@@ -18,12 +19,18 @@ function BuscarNotasPorTitulo(titulo, notas){
         }
     }
 }
-function deleteTask(title) {
-    let tasks = JSON.parse(localStorage.getItem('tasks'));
-    for(let i = 0; i < tasks.length; i++) {
-      if(tasks[i].title == title) {
-        tasks.splice(i, 1);
-      }
-    }
+
+function refrescarHTML() {
+  const divMostrarNotas = document.querySelector("#MostrarNotasDiv");
+  while (divMostrarNotas.firstChild) {
+    divMostrarNotas.removeChild(divMostrarNotas.firstChild);
+  }
 }
+
+function eliminarNota(titulo) {
+  listaNotas = listaNotas.filter((nota) => nota.titulo !== titulo);
+  refrescarHTML();
+  GuardarNotas();
+}
+
 export {CrearNota, GuardarNotas, BuscarNotasPorTitulo, eliminarNota};

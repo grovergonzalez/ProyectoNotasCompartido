@@ -1,5 +1,5 @@
 import { CrearNota } from "./CRUDconNotas";
-import { deleteTask } from "./CRUDconNotas";
+
 let notas = [];
 window.onload = function () {
   window.notas = [];
@@ -9,13 +9,12 @@ const descripcionNota = document.querySelector("#DescripcionNota");
 const formCrearNota = document.querySelector("#Crear_Nota_Form");
 const divCrearNota = document.querySelector("#MostrarNotasDiv");
 
-let tasksView = document.getElementById('MostrarNotasDiv');
-tasksView.innerHTML = '';
+let NotasView = document.getElementById('MostrarNotasDiv');
+NotasView.innerHTML = '';
 
 
 formCrearNota.addEventListener("submit", (event) => {
   event.preventDefault();
-  const fechaActual = new Date();
   const nota = CrearNota(tituloNota.value, descripcionNota.value);
   event.preventDefault();
   notas.push(nota);
@@ -25,9 +24,7 @@ formCrearNota.addEventListener("submit", (event) => {
     <p>${nota.titulo}  </p>
     <p>${nota.descripcion} </p>
     <p>${nota.fecha.getDate()}  / ${nota.fecha.getMonth()} / ${nota.fecha.getFullYear()}  </p>
-    <a href="#" onclick="deleteTask('${nota.titulo}')" class="btn btn-danger ml-5">Delete</a>
+    <a href="index.html" onclick="eliminarNota('${nota.titulo}')" class="btn btn-danger ml-5">Delete</a>
    </div>
   </div>`;
-
 });
-
