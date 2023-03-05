@@ -12,18 +12,33 @@
           <a class="navbar-brand" href="#">NOTAS</a>
       </nav>
 
+      
     <div class="container">
-        <div class="creacion_notas">
-            <form id="Crear_Nota_Form">
-                <b><label style="font-size: x-large; font-style: italic;"  for="CrearNota">Crear una Nota:</label></b> <br>
-                <input type="text" id="TituloNota" placeholder="Titulo"/> <br>
-                <textarea id="DescripcionNota" rows="8" cols="80" placeholder="Agregar una descripcion"></textarea>
-                <button type="submit" class="btn btn-primary btn-block">Save</button>
-            </form>
+        <div class="row my-5">
+            <div class="col-md-4">
+
+                <div class="card">
+                    <div class="card-body">
+
+                            <form id="Crear_Nota_Form">
+                                <b><label style="font-size: x-large; font-style: italic;"  for="CrearNota">Crear una Nota:</label></b> <br>
+                                <div class="form-group">
+                                    <input type="text" id="TituloNota" placeholder="Titulo"/>
+                                </div>
+                                <div class="form-group">
+                                    <textarea id="DescripcionNota" rows="10" cols="30" placeholder="Agregar una descripcion"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Save</button>
+                            </form>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-    <div id="MostrarNotasDiv"></div>
 
+    <div id="MostrarNotasDiv"></div>
     <script type="module" src="./src/presenter.js"></script>
 
 </body>
