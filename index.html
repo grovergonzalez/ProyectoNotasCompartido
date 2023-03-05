@@ -4,9 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Notas</title>
 </head>
 <body>
-    
+    <form id="Crear-Form">
+        <b><label style="font-size: x-large; font-style: italic;"  for="CrearNota">Nota:</label></b> <br>
+        <label for="TituloNota">Titulo:</label>
+        <input type="text" id="TituloNota" /> <br>
+
+        <label for="DescripcionNota">Descripcion:</label>
+        <input type="text" id="DescripcionNota" />
+
+        <input type="submit" value="Crear" id="Crear-button" />
+    </form>
+    <div id="Crear-div"></div>
+    <script type="module" src="./src/presenter.js"></script>
 </body>
 </html>
