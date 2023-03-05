@@ -6,8 +6,8 @@ window.onload = function () {
 };
 const tituloNota = document.querySelector("#TituloNota");
 const descripcionNota = document.querySelector("#DescripcionNota");
-const formCrearNota = document.querySelector("#Crear-Form");
-const divCrearNota = document.querySelector("#Crear-div");
+const formCrearNota = document.querySelector("#Crear_Nota_Form");
+const divCrearNota = document.querySelector("#MostrarNotasDiv");
 
 formCrearNota.addEventListener("submit", (event) => {
   event.preventDefault();

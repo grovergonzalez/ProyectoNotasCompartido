@@ -7,17 +7,19 @@
     <title>Notas</title>
 </head>
 <body>
-    <form id="Crear-Form">
-        <b><label style="font-size: x-large; font-style: italic;"  for="CrearNota">Nota:</label></b> <br>
-        <label for="TituloNota">Titulo:</label>
-        <input type="text" id="TituloNota" /> <br>
-
-        <label for="DescripcionNota">Descripcion:</label>
-        <input type="text" id="DescripcionNota" />
-
-        <input type="submit" value="Crear" id="Crear-button" />
-    </form>
-    <div id="Crear-div"></div>
+    <div class="creacion_notas">
+        <form id="Crear_Nota_Form">
+            <b><label style="font-size: x-large; font-style: italic;"  for="CrearNota">Nota:</label></b> <br>
+            <label for="TituloNota">Titulo:</label>
+            <input type="text" id="TituloNota" /> <br>
+    
+            <label for="DescripcionNota">Descripcion:</label>
+            <textarea id="DescripcionNota" rows="8" cols="80" placeholder="Agregar una descripcion"></textarea>
+    
+            <input type="submit" value="Crear" id="Crear-button" />
+        </form>
+    </div>
+    <div id="MostrarNotasDiv"></div>
     <script type="module" src="./src/presenter.js"></script>
 </body>
 </html>
