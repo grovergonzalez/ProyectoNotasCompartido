@@ -10,8 +10,20 @@ function GuardarNotas(nota){
     notas.push(nota);
 }
 
-function BuscarNotasPorTitulo(titulo){
-
+function BuscarNotasPorTitulo(titulo, notas){
+    for (var i = 0; i < notas.length; i++) {
+        var tituloABuscar = notas[i].titulo;
+        if (titulo == tituloABuscar) {
+          return notas[i];
+        }
+    }
 }
-
-export {CrearNota, GuardarNotas};
+function deleteTask(title) {
+    let tasks = JSON.parse(localStorage.getItem('tasks'));
+    for(let i = 0; i < tasks.length; i++) {
+      if(tasks[i].title == title) {
+        tasks.splice(i, 1);
+      }
+    }
+}
+export {CrearNota, GuardarNotas, BuscarNotasPorTitulo, eliminarNota};
