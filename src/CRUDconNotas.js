@@ -20,17 +20,33 @@ function BuscarNotasPorTitulo(titulo, notas){
     }
 }
 
-function refrescarHTML() {
-  const divMostrarNotas = document.querySelector("#MostrarNotasDiv");
-  while (divMostrarNotas.firstChild) {
-    divMostrarNotas.removeChild(divMostrarNotas.firstChild);
+function eliminarNota(titulo) {
+  for (var i = 0; i < notas.length; i++) {
+    var tituloAEliminar = notas[i].titulo;
+    if (titulo == tituloAEliminar) {
+      notas[i].removeChild();
+    }
   }
+  return notas;
 }
 
-function eliminarNota(titulo) {
-  listaNotas = listaNotas.filter((nota) => nota.titulo !== titulo);
+function editarNota(notas, nota) {
+  notas.titulo = tituloNota.value;
+  notas.texto = descripcionNota.value;
+
+  listaNotas.map((nota) => {
+    if (nota.fecha === notas.fecha) {
+      nota.fecha = notas.fecha;
+      nota.descripcion = notas.descripcion;
+      nota.titulo = notas.titulo;
+    }
+  });
+
   refrescarHTML();
   GuardarNotas();
+  formulario.reset();
+
+  formulario.querySelector('button[type="submit"]').textContent = "Agregar";
 }
 
 export {CrearNota, GuardarNotas, BuscarNotasPorTitulo, eliminarNota};
