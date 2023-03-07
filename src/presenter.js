@@ -1,33 +1,60 @@
-import { CrearNota } from "./CRUDconNotas";
-import { deleteTask } from "./CRUDconNotas";
-let notas = [];
-window.onload = function () {
-  window.notas = [];
-};
-const tituloNota = document.querySelector("#TituloNota");
-const descripcionNota = document.querySelector("#DescripcionNota");
-const formCrearNota = document.querySelector("#Crear_Nota_Form");
-const divCrearNota = document.querySelector("#MostrarNotasDiv");
+document.getElementById('formulario').addEventListener('submit', guardarNota);
 
-let tasksView = document.getElementById('MostrarNotasDiv');
-tasksView.innerHTML = '';
+function guardarNota(e) {
+  let titulo = document.getElementById('titulo').value;
+  let descripcion = document.getElementById('descripcion').value;
+  console.log(descripcion)
 
+  let nota = {
+    titulo,
+    descripcion
+  };
 
-formCrearNota.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const fechaActual = new Date();
-  const nota = CrearNota(tituloNota.value, descripcionNota.value);
-  event.preventDefault();
-  notas.push(nota);
+  if(localStorage.getItem('notas') === null) {
+    let notas = [];
+    notas.push(nota);
+    localStorage.setItem('notas', JSON.stringify(notas));
+  } else {
+    let notas = JSON.parse(localStorage.getItem('notas'));
+    notas.push(nota);
+    localStorage.setItem('notas', JSON.stringify(notas));
+  }
 
-  divCrearNota.innerHTML += `<div class="card">
-  <div class="card-body">
-    <p>${nota.titulo}  </p>
-    <p>${nota.descripcion} </p>
-    <p>${nota.fecha.getDate()}  / ${nota.fecha.getMonth()} / ${nota.fecha.getFullYear()}  </p>
-    <a href="#" onclick="deleteTask('${nota.titulo}')" class="btn btn-danger ml-5">Delete</a>
-   </div>
-  </div>`;
+  getNotas();
+  document.getElementById('formulario').reset();
+  e.preventDefault();
+}
 
-});
+function deleteNota(titulo) {
+  console.log(titulo)
+  let notas = JSON.parse(localStorage.getItem('notas'));
+  for(let i = 0; i < notas.length; i++) {
+    if(notas[i].titulo == titulo) {
+      notas.splice(i, 1);
+    }
+  }
+  
+  localStorage.setItem('notas', JSON.stringify(notas));
+  getNotas();
+}
 
+function getNotas() {
+  let notas = JSON.parse(localStorage.getItem('notas'));
+  let notasView = document.getElementById('notas');
+  notasView.innerHTML = '';
+  for(let i = 0; i < notas.length; i++) {
+    let titulo = notas[i].titulo;
+    let descripcion = notas[i].descripcion;
+
+    notasView.innerHTML += `<div class="card mb-3">
+        <div class="card-body">
+        <p>${titulo}  </p>
+        <p>${descripcion} </p>
+          <a href="#" onclick="deleteNota('${titulo}')" class="btn btn-danger ml-5">Delete</a>
+          </p>
+        </div>
+      </div>`;
+  }
+}
+
+getNotas();
