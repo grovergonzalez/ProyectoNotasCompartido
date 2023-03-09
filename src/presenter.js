@@ -3,7 +3,7 @@ document.getElementById('formulario').addEventListener('submit', guardarNota);
 function guardarNota(e) {
   let titulo = document.getElementById('titulo').value;
   let descripcion = document.getElementById('descripcion').value;
-  console.log(descripcion)
+  //agregar fecha
 
   let nota = {
     titulo,
@@ -51,6 +51,7 @@ function getNotas() {
         <p>${titulo}  </p>
         <p>${descripcion} </p>
           <a href="#" onclick="deleteNota('${titulo}')" class="btn btn-danger ml-5">Delete</a>
+          <a href="#" onclick="" class="btn btn-success ml-5">Editar</a>
           </p>
         </div>
       </div>`;
