@@ -45,11 +45,11 @@ function searchNota(titulo){
   let notas = JSON.parse(localStorage.getItem('notas'));
   for(let i = 0; i < notas.length; i++) {
     if(notas[i].titulo == titulo) {
-      return notas[i];
+      return getNota(titulo);
     }
   }
   localStorage.setItem('notas', JSON.stringify(notas));
-  getNotaEncontrada();
+  
 }
 
 function getNotas() {
@@ -93,7 +93,7 @@ function getNota(titulo) {
       </div>`;
   }
 }
-
+getNotas();
 
 function getNotaEncontrada() {
   let notas = JSON.parse(localStorage.getItem('notas'));
@@ -110,8 +110,6 @@ function getNotaEncontrada() {
           <p>${descripcion} </p>
       </nav>`;
   }
-  getNota();
 }
 
-getNotas();
 getNotaEncontrada();
