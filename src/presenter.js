@@ -45,11 +45,10 @@ function searchNota(titulo){
   let notas = JSON.parse(localStorage.getItem('notas'));
   for(let i = 0; i < notas.length; i++) {
     if(notas[i].titulo == titulo) {
-      return getNota(titulo);
+      return notas[i];
     }
   }
   localStorage.setItem('notas', JSON.stringify(notas));
-  
 }
 
 function getNotas() {
