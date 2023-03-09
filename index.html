@@ -1,54 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organizador de Notas</title>
+    <title>Keep</title>
     <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
-</head>
-<body>
+  </head>
+  <body>
+
     <nav class="navbar navbar-light bg-light">
-          <a class="navbar-brand" href="#">NOTAS</a>
-          <form class="d-flex" id="Buscar">
-            <input class="form-control me-sm-2" type="text" placeholder="Buscar" id="NotaBuscar">
+        <a class="navbar-brand" href="#">Keep App</a>
+        <form class="d-flex" id="BuscarForm">
+            <input class="form-control me-sm-2" type="search" placeholder="Buscar">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
           </form>
-      </nav>
+    </nav>
 
-      
     <div class="container">
-        <div class="row my-5">
-            <div class="col-md-4">
+      <div class="row my-5">
+        <div class="col-md-4">
 
-                <div class="card">
-                    <div class="card-body">
-
-                            <form id="Crear_Nota_Form">
-                                <b><label style="font-size: x-large; font-style: italic;"  for="CrearNota">Crear una Nota:</label></b> <br>
-                                <div class="form-group">
-                                    <input type="text" id="TituloNota" placeholder="Titulo"/>
-                                </div>
-                                <div class="form-group">
-                                    <textarea id="DescripcionNota" rows="10" cols="30" placeholder="Agregar una descripcion"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-block">Save</button>
-                            </form>
-
-                    </div>
+          <div class="card">
+            <div class="card-body">
+              
+              <form id="formulario">
+                <div class="form-group">
+                  <input type="text" id="titulo" placeholder="Titulo" class="form-control">
                 </div>
-
-            </div>
-
-            <div class="col-md-8">
-                <div id="MostrarNotasDiv">
-                    <button type="button" class="btn btn-danger">Delete</button>
+                <div class="form-group">
+                  <textarea id="descripcion" cols="30" rows="10" placeholder="Descripcion" class="form-control"></textarea>
                 </div>
+                <button type="submit" class="btn btn-primary btn-block">Agregar</button>
+              </form>
             </div>
+          </div>
         </div>
+
+        <div class="col-md-8">
+          <div id="notas"></div>
+        </div>
+      </div>
     </div>
-
-    <script type="module" src="./src/presenter.js"></script>
-
-</body>
+    <script src="src/presenter.js"></script>
+  </body>
 </html>

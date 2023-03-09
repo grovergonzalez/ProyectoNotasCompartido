@@ -1,50 +1,117 @@
-import { CrearNota, GuardarNotas } from "./CRUDconNotas";
+document.getElementById('formulario').addEventListener('submit', guardarNota);
+const buscarForm = document.querySelector("#BuscarForm");
 
-let notas = [];
-window.onload = function () {
-  window.notas = [];
-};
+function guardarNota(e) {
+  let titulo = document.getElementById('titulo').value;
+  let descripcion = document.getElementById('descripcion').value;
+  console.log(descripcion)
 
-function refrescarHTML() {
-  const divMostrarNotas = document.querySelector("#MostrarNotasDiv");
-  while (divMostrarNotas.firstChild) {
-    divMostrarNotas.removeChild(divMostrarNotas.firstChild);
+  let nota = {
+    titulo,
+    descripcion
+  };
+
+  if(localStorage.getItem('notas') === null) {
+    let notas = [];
+    notas.push(nota);
+    localStorage.setItem('notas', JSON.stringify(notas));
+  } else {
+    let notas = JSON.parse(localStorage.getItem('notas'));
+    notas.push(nota);
+    localStorage.setItem('notas', JSON.stringify(notas));
   }
+
+  getNotas();
+  document.getElementById('formulario').reset();
+  e.preventDefault();
 }
 
-
-const tituloNota = document.querySelector("#TituloNota");
-const descripcionNota = document.querySelector("#DescripcionNota");
-const formCrearNota = document.querySelector("#Crear_Nota_Form");
-const divCrearNota = document.querySelector("#MostrarNotasDiv");
-
-let NotasView = document.getElementById('MostrarNotasDiv');
-NotasView.innerHTML = '';
-
-function eliminarNota(titulo) {
-  for (var i = 0; i < notas.length; i++) {
-    var tituloAEliminar = notas[i].titulo;
-    if (titulo == tituloAEliminar) {
-      notas[i].removeChild();
+function deleteNota(titulo) {
+  console.log(titulo)
+  let notas = JSON.parse(localStorage.getItem('notas'));
+  for(let i = 0; i < notas.length; i++) {
+    if(notas[i].titulo == titulo) {
+      notas.splice(i, 1);
     }
   }
-  return notas;
+  
+  localStorage.setItem('notas', JSON.stringify(notas));
+  getNotas();
+}
+
+function searchNota(titulo){
+  console.log(titulo)
+  event.preventDefault();
+  let notas = JSON.parse(localStorage.getItem('notas'));
+  for(let i = 0; i < notas.length; i++) {
+    if(notas[i].titulo == titulo) {
+      return notas[i];
+    }
+  }
+  localStorage.setItem('notas', JSON.stringify(notas));
+  getNotaEncontrada();
+}
+
+function getNotas() {
+  let notas = JSON.parse(localStorage.getItem('notas'));
+  let notasView = document.getElementById('notas');
+  notasView.innerHTML = '';
+  for(let i = 0; i < notas.length; i++) {
+    let titulo = notas[i].titulo;
+    let descripcion = notas[i].descripcion;
+
+    notasView.innerHTML += `<div class="card mb-3">
+        <div class="card-body">
+        <p>${titulo}  </p>
+        <p>${descripcion} </p>
+          <a href="#" onclick="deleteNota('${titulo}')" class="btn btn-danger ml-5">Delete</a>
+        </div>
+      </div>`;
+  }
+}
+
+function getNota(titulo) {
+  let notas = JSON.parse(localStorage.getItem('notas'));
+  let notasView = document.getElementById('notas');
+  var NotaEncontrada = {
+    titulo: "",
+    descripcion: "",
+  };
+  notasView.innerHTML = '';
+  for(let i = 0; i < notas.length; i++) {
+    if(notas[i].titulo == titulo)
+    {
+      NotaEncontrada.titulo = notas[i].titulo;
+      NotaEncontrada.descripcion = notas[i].descripcion;
+    }
+
+    notasView.innerHTML += `<div class="card mb-3">
+        <div class="card-body">
+        <p>${NotaEncontrada.titulo}  </p>
+        <p>${NotaEncontrada.descripcion} </p>
+        </div>
+      </div>`;
+  }
 }
 
 
-formCrearNota.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const nota = CrearNota(tituloNota.value, descripcionNota.value);
-  event.preventDefault();
-  notas.push(nota);
+function getNotaEncontrada() {
+  let notas = JSON.parse(localStorage.getItem('notas'));
+  let notasView = document.getElementById('notas');
+  notasView.innerHTML = '';
+  for(let i = 0; i < notas.length; i++) {
+    let titulo = notas[i].titulo;
+    let descripcion = notas[i].descripcion;
 
-  divCrearNota.innerHTML += `<div class="card">
-  <div class="card-body">
-    <p>${nota.titulo}  </p>
-    <p>${nota.descripcion} </p>
-    <p>${nota.fecha.getDate()}  / ${nota.fecha.getMonth()} / ${nota.fecha.getFullYear()}  </p>
-    <a href="index.html/#" onclick="eliminarNota('${nota.titulo}')" class="btn btn-danger">Delete</a>
-   </div>
+    notasView.innerHTML += `
+      <nav class="navbar navbar-light bg-light">
+          <a href="#" onclick="deleteNota('${titulo}')" class="btn btn-secondary my-2 my-sm-0">Delete</a> 
+          <p>${titulo}</p>
+          <p>${descripcion} </p>
+      </nav>`;
+  }
+  getNota();
+}
 
-  </div>`;
-});
+getNotas();
+getNotaEncontrada();
