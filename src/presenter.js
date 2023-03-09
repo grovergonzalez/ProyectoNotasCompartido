@@ -4,7 +4,7 @@ const buscarForm = document.querySelector("#BuscarForm");
 function guardarNota(e) {
   let titulo = document.getElementById('titulo').value;
   let descripcion = document.getElementById('descripcion').value;
-  console.log(descripcion)
+  //agregar fecha
 
   let nota = {
     titulo,
@@ -65,30 +65,7 @@ function getNotas() {
         <p>${titulo}  </p>
         <p>${descripcion} </p>
           <a href="#" onclick="deleteNota('${titulo}')" class="btn btn-danger ml-5">Delete</a>
-        </div>
-      </div>`;
-  }
-}
-
-function getNota(titulo) {
-  let notas = JSON.parse(localStorage.getItem('notas'));
-  let notasView = document.getElementById('notas');
-  var NotaEncontrada = {
-    titulo: "",
-    descripcion: "",
-  };
-  notasView.innerHTML = '';
-  for(let i = 0; i < notas.length; i++) {
-    if(notas[i].titulo == titulo)
-    {
-      NotaEncontrada.titulo = notas[i].titulo;
-      NotaEncontrada.descripcion = notas[i].descripcion;
-    }
-
-    notasView.innerHTML += `<div class="card mb-3">
-        <div class="card-body">
-        <p>${NotaEncontrada.titulo}  </p>
-        <p>${NotaEncontrada.descripcion} </p>
+          </p>
         </div>
       </div>`;
   }
