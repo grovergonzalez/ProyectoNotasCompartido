@@ -1,4 +1,5 @@
 document.getElementById('formulario').addEventListener('submit', guardarNota);
+const buscarForm = document.querySelector("#BuscarForm");
 
 function guardarNota(e) {
   let titulo = document.getElementById('titulo').value;
@@ -38,6 +39,19 @@ function deleteNota(titulo) {
   getNotas();
 }
 
+function searchNota(titulo){
+  console.log(titulo)
+  event.preventDefault();
+  let notas = JSON.parse(localStorage.getItem('notas'));
+  for(let i = 0; i < notas.length; i++) {
+    if(notas[i].titulo == titulo) {
+      return notas[i];
+    }
+  }
+  localStorage.setItem('notas', JSON.stringify(notas));
+  getNotaEncontrada();
+}
+
 function getNotas() {
   let notas = JSON.parse(localStorage.getItem('notas'));
   let notasView = document.getElementById('notas');
@@ -51,11 +65,30 @@ function getNotas() {
         <p>${titulo}  </p>
         <p>${descripcion} </p>
           <a href="#" onclick="deleteNota('${titulo}')" class="btn btn-danger ml-5">Delete</a>
-          <a href="#" onclick="" class="btn btn-success ml-5">Editar</a>
           </p>
         </div>
       </div>`;
   }
 }
 
+
+function getNotaEncontrada() {
+  let notas = JSON.parse(localStorage.getItem('notas'));
+  let notasView = document.getElementById('notas');
+  notasView.innerHTML = '';
+  for(let i = 0; i < notas.length; i++) {
+    let titulo = notas[i].titulo;
+    let descripcion = notas[i].descripcion;
+
+    notasView.innerHTML += `
+      <nav class="navbar navbar-light bg-light">
+          <a href="#" onclick="deleteNota('${titulo}')" class="btn btn-secondary my-2 my-sm-0">Delete</a> 
+          <p>${titulo}</p>
+          <p>${descripcion} </p>
+      </nav>`;
+  }
+  getNota();
+}
+
 getNotas();
+getNotaEncontrada();
